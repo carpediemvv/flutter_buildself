@@ -14,15 +14,36 @@ class _TabNavigatorState extends State<TabNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('cdeshi'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.share), onPressed: () {})
+        ],
+      ),
+      endDrawer: new Drawer(),
+      drawer: new Drawer(),
+      floatingActionButton: ConstrainedBox(
+        constraints: BoxConstraints.tightFor(width: 88, height: 80),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [Colors.red, Colors.orange]),
+              borderRadius: BorderRadius.circular(3),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black12, offset: Offset(2, 2), blurRadius: 4)
+              ]),
+          child:Icon(Icons.share),),
+      ),
+      floatingActionButtonLocation:  FloatingActionButtonLocation.startTop,
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-          Color(0xffedeef0),
-          Color(0xffe6e7e9),
-        ])),
+              Color(0xffedeef0),
+              Color(0xffe6e7e9),
+            ])),
         child: Center(
           child: Text(
-            'hhahaahha$_currentIndex',
+            'hhahafahha$_currentIndex',
             style: TextStyle(fontSize: 36, color: Colors.blue),
           ),
         ),
