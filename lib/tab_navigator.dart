@@ -15,13 +15,31 @@ class _TabNavigatorState extends State<TabNavigator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('cdeshi'),
+        title: Text(''),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.share), onPressed: () {})
         ],
       ),
-      endDrawer: new Drawer(),
-      drawer: new Drawer(),
+      drawer: new Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(child: Text('Nick Name')),
+            ListTile(
+              title: Text('Exercise'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Cooking'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: ConstrainedBox(
         constraints: BoxConstraints.tightFor(width: 88, height: 80),
         child: DecoratedBox(
@@ -32,15 +50,16 @@ class _TabNavigatorState extends State<TabNavigator> {
                 BoxShadow(
                     color: Colors.black12, offset: Offset(2, 2), blurRadius: 4)
               ]),
-          child:Icon(Icons.share),),
+          child: Icon(Icons.share),
+        ),
       ),
-      floatingActionButtonLocation:  FloatingActionButtonLocation.startTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-              Color(0xffedeef0),
-              Color(0xffe6e7e9),
-            ])),
+          Color(0xffedeef0),
+          Color(0xffe6e7e9),
+        ])),
         child: Center(
           child: Text(
             'hhahafahha$_currentIndex',
