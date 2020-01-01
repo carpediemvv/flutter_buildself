@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:puyang/ExercisePage.dart';
 
+import 'Test/test.dart';
 ///底部导航框架
 class TabNavigator extends StatefulWidget {
   @override
@@ -17,7 +19,15 @@ class _TabNavigatorState extends State<TabNavigator> {
       appBar: AppBar(
         title: Text(''),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.share), onPressed: () {})
+          IconButton(icon: Icon(Icons.share), onPressed: () {
+            //导航到新路由
+            Navigator.push( context,
+                MaterialPageRoute(builder: (context) {
+                  return TestContainerStateful();
+                },
+                    maintainState:true,
+                    fullscreenDialog: true));
+          })
         ],
       ),
       drawer: new Drawer(
@@ -28,15 +38,16 @@ class _TabNavigatorState extends State<TabNavigator> {
             ListTile(
               title: Text('Exercise'),
               onTap: () {
-                Navigator.pop(context);
+                  Navigator.of(context).pushNamed("1Exercise");
               },
             ),
             ListTile(
               title: Text('Cooking'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, "Cooking");
               },
             ),
+
           ],
         ),
       ),
