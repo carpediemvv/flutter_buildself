@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:puyang/ExercisePage.dart';
 
@@ -15,83 +18,82 @@ class _TabNavigatorState extends State<TabNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(''),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.share), onPressed: () {
-            //导航到新路由
-            Navigator.push( context,
-                MaterialPageRoute(builder: (context) {
-                  return TestContainerStateful();
-                },
-                    maintainState:true,
-                    fullscreenDialog: true));
-          })
-        ],
-      ),
-      drawer: new Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(child: Text('Nick Name')),
-            ListTile(
-              title: Text('Exercise'),
-              onTap: () {
-                  Navigator.of(context).pushNamed("1Exercise");
-              },
-            ),
-            ListTile(
-              title: Text('Cooking'),
-              onTap: () {
-                Navigator.pushNamed(context, "Cooking");
-              },
-            ),
-
-          ],
-        ),
-      ),
-      floatingActionButton: ConstrainedBox(
-        constraints: BoxConstraints.tightFor(width: 88, height: 80),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [Colors.red, Colors.orange]),
-              borderRadius: BorderRadius.circular(3),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black12, offset: Offset(2, 2), blurRadius: 4)
-              ]),
-          child: Icon(Icons.share),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-      body: Container(
+    return  DecoratedBox(
         decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Color(0xffedeef0),
-          Color(0xffe6e7e9),
-        ])),
-        child: Center(
-          child: Text(
-            'hhahafahha$_currentIndex',
-            style: TextStyle(fontSize: 36, color: Colors.blue),
-          ),
+            image:DecorationImage(
+              image: AssetImage('images/bg.jpg'),
+              fit: BoxFit.fitHeight
+            ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          //修改状态
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          _bottomItem('我', Icons.folder, 0),
-          _bottomItem('大', Icons.explore, 1),
-          _bottomItem('洗', Icons.person, 2),
-        ],
-      ),
+        child:
+          Padding(padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+          child: Stack(
+            children: [
+              BackdropFilter(
+                filter: new ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                child: new Container(
+                  color: Colors.white.withOpacity(0.1),
+                ),
+              ),
+              Scaffold(
+                backgroundColor: Colors.transparent,
+                drawer: Container(
+                  child: Drawer(
+                      child:ListView(
+                        padding: EdgeInsets.zero,
+                        children: <Widget>[
+                          DrawerHeader(child: Text('Nick Name')),
+                          ListTile(
+                            title: Text('Exercise'),
+                            onTap: () {
+                              Navigator.of(context).pushNamed("1Exercise");
+                            },
+                          ),
+                          ListTile(
+                            title: Text('Cooking'),
+                            onTap: () {
+                              Navigator.pushNamed(context, "Cooking");
+                            },
+                          ),
+
+                        ],
+                      ),
+                  ),
+                ),
+
+                floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+                body: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Colors.transparent,
+                        Colors.transparent,
+                      ])),
+                  child: Center(
+                    child: Text(
+                      'hhahafahha$_currentIndex',
+                      style: TextStyle(fontSize: 36, color: Colors.blue),
+                    ),
+                  ),
+                ),
+                bottomNavigationBar: BottomNavigationBar(
+                  backgroundColor: Color(0xdcFFFFFF),
+                  currentIndex: _currentIndex,
+                  onTap: (index) {
+                    //修改状态
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                  items: [
+                    _bottomItem('我', Icons.folder, 0),
+                    _bottomItem('大', Icons.explore, 1),
+                    _bottomItem('洗', Icons.person, 2),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        )
     );
   }
 
