@@ -22,7 +22,7 @@ class _TabNavigatorState extends State<TabNavigator> {
     return  DecoratedBox(
         decoration: BoxDecoration(
             image:DecorationImage(
-              image: AssetImage('images/bg.jpg'),
+              image: AssetImage('images/bg1.jpg'),
               fit: BoxFit.fitHeight
             ),
         ),
@@ -72,6 +72,7 @@ class _TabNavigatorState extends State<TabNavigator> {
                   ),
                 ),
                 bottomNavigationBar: BlurOvalWidget(BottomNavigationBar(
+                  elevation: 0,
                   backgroundColor: Colors.transparent,
                   currentIndex: _currentIndex,
                   onTap: (index) {

@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 
 class BlurOvalWidget extends StatelessWidget {
   final Widget _widget;
-  double _padding = 0;
 
-  BlurOvalWidget(this._widget, {double padding = 0}) {
-    if (padding != 0) this._padding = padding;
+  BlurOvalWidget(this._widget) {
   }
 
   @override
@@ -20,7 +18,6 @@ class BlurOvalWidget extends StatelessWidget {
         ),
         child: Container(
           color: Colors.white10,
-          padding: EdgeInsets.all(_padding),
           child: _widget,
         ),
       ),
