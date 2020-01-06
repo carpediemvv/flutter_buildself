@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:puyang/ExercisePage.dart';
+import 'package:puyang/widget/BlurOvalWidget.dart';
 
 import 'Test/test.dart';
 ///底部导航框架
@@ -29,12 +30,7 @@ class _TabNavigatorState extends State<TabNavigator> {
           Padding(padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
           child: Stack(
             children: [
-              BackdropFilter(
-                filter: new ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                child: new Container(
-                  color: Colors.white.withOpacity(0.1),
-                ),
-              ),
+
               Scaffold(
                 backgroundColor: Colors.transparent,
                 drawer: Container(
@@ -75,8 +71,8 @@ class _TabNavigatorState extends State<TabNavigator> {
                     ),
                   ),
                 ),
-                bottomNavigationBar: BottomNavigationBar(
-                  backgroundColor: Color(0xdcFFFFFF),
+                bottomNavigationBar: BlurOvalWidget(BottomNavigationBar(
+                  backgroundColor: Colors.transparent,
                   currentIndex: _currentIndex,
                   onTap: (index) {
                     //修改状态
@@ -89,7 +85,7 @@ class _TabNavigatorState extends State<TabNavigator> {
                     _bottomItem('大', Icons.explore, 1),
                     _bottomItem('洗', Icons.person, 2),
                   ],
-                ),
+                ),)
               ),
             ],
           ),
