@@ -30,8 +30,21 @@ class _TabNavigatorState extends State<TabNavigator> {
           Padding(padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
           child: Stack(
             children: [
-
               Scaffold(
+                appBar: AppBar(
+                  leading: Builder(
+                     builder: (BuildContext context) {
+                       return IconButton(
+                         color: Colors.black,
+                         icon: const Icon(Icons.menu),
+                         onPressed: () { Scaffold.of(context).openDrawer(); },
+                         tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+                       );
+                     },
+                   ),
+                  backgroundColor: Colors.white30,
+                  elevation: 0,
+                ),
                 backgroundColor: Colors.transparent,
                 drawer: Container(
                   child: Drawer(
