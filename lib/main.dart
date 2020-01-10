@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:puyang/ExercisePage.dart';
-import 'package:puyang/CookingPage.dart';
 import 'package:puyang/tab_navigator.dart';
 
 import 'Test/ongenerateRoute.dart';

@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 class BlurOvalWidget extends StatelessWidget {
   final Widget _widget;
 
-  BlurOvalWidget(this._widget) {
-  }
+  BlurOvalWidget(this._widget);
 
   @override
   Widget build(BuildContext context) {
