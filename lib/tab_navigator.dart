@@ -26,32 +26,7 @@ class _TabNavigatorState extends State<TabNavigator> {
         ),
         child:
           Padding(padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-          child: Stack(
-            children: [
-              Scaffold(
-                appBar: _topbar(),
-                backgroundColor: Colors.transparent,
-                drawer: _drawer(),
-                body: _body(),
-                bottomNavigationBar: BlurOvalWidget(BottomNavigationBar(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  currentIndex: _currentIndex,
-                  onTap: (index) {
-                    //修改状态
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
-                  items: [
-                    _bottomItem('1fd', Icons.folder, 0),
-                    _bottomItem('ae', Icons.explore, 1),
-                    _bottomItem('lkl', Icons.person, 2),
-                  ],
-                ),)
-              ),
-            ],
-          ),
+          child: _bodyContainer()
         )
     );
   }
@@ -99,67 +74,52 @@ class _TabNavigatorState extends State<TabNavigator> {
     );
   }
 
+  //内容top
+  _bodyContainer(){
+    AppBar appBar= _topbar();
+    return Scaffold(
+        appBar: appBar,
+        backgroundColor: Colors.transparent,
+        drawer: _drawer(),
+        body: _body(appBar.preferredSize.height),
+        bottomNavigationBar: BlurOvalWidget(BottomNavigationBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            //修改状态
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: [
+            _bottomItem('1fd', Icons.folder, 0),
+            _bottomItem('ae', Icons.explore, 1),
+            _bottomItem('lkl', Icons.person, 2),
+          ],
+        ),)
+    );
+  }
+
   //内容
-  _body(){
+  _body(var appbarHeight){
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
             Colors.transparent,
             Colors.transparent,
           ])),
-      child: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: const EdgeInsets.all(80.0),
-          children: <Widget>[
-            const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'), const Text('I\'m dedicating every day to you'),
-            const Text('Domestic life was never quite my style'),
-            const Text('When you smile, you knock me out, I fall apart'),
-            const Text('And I thought I was so smart'),
-          ],
-        )
+      child: Column(
+        children: <Widget>[
+          ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.fromLTRB(20, appbarHeight+MediaQueryData.fromWindow(window).padding.top,20,0),
+            children: <Widget>[
+              Text("Hello world"),
+              Text("Hello world")
+            ],
+          )
+        ],
       ),
     );
   }
