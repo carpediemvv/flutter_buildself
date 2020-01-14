@@ -17,29 +17,27 @@ class _TabNavigatorState extends State<TabNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    return  DecoratedBox(
+    return DecoratedBox(
         decoration: BoxDecoration(
-            image:DecorationImage(
-              image: AssetImage('images/bg1.jpg'),
-              fit: BoxFit.fitHeight
-            ),
+          image: DecorationImage(
+              image: AssetImage('images/bg1.jpg'), fit: BoxFit.fitHeight),
         ),
-        child:
-          Padding(padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-          child: _bodyContainer()
-        )
-    );
+        child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+            child: _bodyContainer()));
   }
 
   //顶部导航栏
-  _topbar(){
+  _topbar() {
     return AppBar(
       leading: Builder(
         builder: (BuildContext context) {
           return IconButton(
             color: Colors.black,
             icon: const Icon(Icons.menu),
-            onPressed: () { Scaffold.of(context).openDrawer(); },
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
           );
         },
@@ -50,9 +48,9 @@ class _TabNavigatorState extends State<TabNavigator> {
   }
 
   //侧滑导航
-  _drawer(){
+  _drawer() {
     return Drawer(
-      child:ListView(
+      child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(child: Text('Nick Name')),
@@ -68,67 +66,95 @@ class _TabNavigatorState extends State<TabNavigator> {
               Navigator.pushNamed(context, "Cooking");
             },
           ),
-
         ],
       ),
     );
   }
 
   //内容top
-  _bodyContainer(){
-    AppBar appBar= _topbar();
+  _bodyContainer() {
+    AppBar appBar = _topbar();
     return Scaffold(
         appBar: appBar,
         backgroundColor: Colors.transparent,
         drawer: _drawer(),
         body: _body(appBar.preferredSize.height),
-        bottomNavigationBar: BlurOvalWidget(BottomNavigationBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            //修改状态
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          items: [
-            _bottomItem('1fd', Icons.folder, 0),
-            _bottomItem('ae', Icons.explore, 1),
-            _bottomItem('lkl', Icons.person, 2),
-          ],
-        ),)
-    );
+        bottomNavigationBar: BlurOvalWidget(
+          BottomNavigationBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              //修改状态
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: [
+              _bottomItem('1fd', Icons.folder, 0),
+              _bottomItem('ae', Icons.explore, 1),
+              _bottomItem('lkl', Icons.person, 2),
+            ],
+          ),
+        ));
   }
 
   //内容
-  _body(var appbarHeight){
+  _body(var appbarHeight) {
     return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Colors.transparent,
-            Colors.transparent,
-          ])),
-      child:
-          ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.fromLTRB(20, appbarHeight+MediaQueryData.fromWindow(window).padding.top,20,0),
-            children: <Widget>[
-              Text("Hello world"),
-              Text("Hello worlHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlHello world"), Text("Hello world"),
-              Text("Hello world"), Text("Hello world"),
-              Text("HellolHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worl world"), Text("Hello world"),
-              Text("Hello lHello worlHll"
-                  "Hello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worllHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worllHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worlello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worllHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worllHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worlworld"), Text("Hello world"),
-              Text("Hello world"), Text("Hello wlHello worlHello worlllo worlHello worlHello worlllo worlHello worlHello worlllo worlorld"),
-              Text("Hello world"), Text("Hello wlHello worlHello worlllo worlHello worlHello worlllo worlllo worlHello worlHello worlllo worlllo worlHello worlHello worlllo worlHello worlHello worlllo worlorld"),
-              Text("Hello world"), Text("HellolHello worlHello worlllo worlHello worlHello worlllo llo worlllo worlHello worlHello worlllo llo worlllo worlHello worlHello worlllo worlHello woHello worlHello worlllo worlHello woHello worlHello worlllo worlHello worlHello worlllo worl world"),
-              Text("Hello world"), Text("HellolHello worlHello worlllo worlHello worlHello worlllo worlHello worlHelworlHello worlHello worlllo worlHello worlHelworlHello worlHello worlllo worlHello worlHello worlllo worl world"),
-
-              Text("Hello world"),
-            ],
-          )
-    );
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Colors.transparent,
+          Colors.transparent,
+        ])),
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          reverse: false,
+          shrinkWrap: true,
+          padding: EdgeInsets.fromLTRB(
+              20,
+              appbarHeight + MediaQueryData.fromWindow(window).padding.top,
+              20,
+              0),
+          children: <Widget>[
+            Container(
+              color: Colors.red,
+              width: 200,
+              height: 200,
+              child: Text("hello world"),
+            ),
+            Container(
+              color: Colors.black12,
+              width: 200,
+              height: 200,
+              child: Text("hello world"),
+            ),
+            Container(
+              color: Colors.orange,
+              width: 200,
+              height: 200,
+              child: Text("hello world"),
+            ),
+            Container(
+              color: Colors.amber,
+              width: 200,
+              height: 200,
+              child: Text("hello world"),
+            ),
+            Container(
+              color: Colors.cyan,
+              width: 200,
+              height: 200,
+              child: Text("hello world"),
+            ),
+            Container(
+              color: Colors.blue,
+              width: 200,
+              height: 200,
+              child: Text("hello world"),
+            ),
+          ],
+        ));
   }
 
   //封装底部tab
