@@ -1,9 +1,10 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:puyang/widget/BlurOvalWidget.dart';
-
+import 'dart:math' as math;
 ///底部导航框架
 class TabNavigator extends StatefulWidget {
   @override
@@ -74,29 +75,13 @@ class _TabNavigatorState extends State<TabNavigator> {
   //内容top
   _bodyContainer() {
     AppBar appBar = _topbar();
+    BlurOvalWidget blurOvalWidget =_bottomContainer();
     return Scaffold(
-        appBar: appBar,
+        appBar: BlurOvalWidget(appBar),
         backgroundColor: Colors.transparent,
         drawer: _drawer(),
         body: _body(appBar.preferredSize.height),
-        bottomNavigationBar: BlurOvalWidget(
-          BottomNavigationBar(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            currentIndex: _currentIndex,
-            onTap: (index) {
-              //修改状态
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            items: [
-              _bottomItem('1fd', Icons.folder, 0),
-              _bottomItem('ae', Icons.explore, 1),
-              _bottomItem('lkl', Icons.person, 2),
-            ],
-          ),
-        ));
+        bottomNavigationBar: blurOvalWidget);
   }
 
   //内容
@@ -111,17 +96,18 @@ class _TabNavigatorState extends State<TabNavigator> {
           scrollDirection: Axis.vertical,
           reverse: false,
           shrinkWrap: true,
+          itemExtent: 80,
           padding: EdgeInsets.fromLTRB(
               20,
               appbarHeight + MediaQueryData.fromWindow(window).padding.top,
               20,
-              0),
+              56+math.max(MediaQueryData.fromWindow(window).padding.bottom-7,0.0)),
           children: <Widget>[
             Container(
               color: Colors.red,
               width: 200,
               height: 200,
-              child: Text("hello world"),
+              child: Text("1hello world"),
             ),
             Container(
               color: Colors.black12,
@@ -155,6 +141,28 @@ class _TabNavigatorState extends State<TabNavigator> {
             ),
           ],
         ));
+  }
+
+  //底部tabContainer
+  _bottomContainer(){
+    return BlurOvalWidget(
+      BottomNavigationBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          //修改状态
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          _bottomItem('1fd', Icons.folder, 0),
+          _bottomItem('ae', Icons.explore, 1),
+          _bottomItem('lkl', Icons.person, 2),
+        ],
+      ),
+    );
   }
 
   //封装底部tab
