@@ -42,8 +42,26 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/bg.jpg
-    - images/bg1.jpg
+    - images/bg.png
+    - images/beibu.png
+    - images/bibu.png
+    - images/fubu.png
+    - images/jianbu.png
+    - images/jingbu.png
+    - images/qusnhen.png
+    - images/tuibu.png
+    - images/tunbu.png
+    - images/xiongbu.png
+    - images/yaobu.png
+    - images/jr-beibu.png
+    - images/jr-bibu.png
+    - images/jr-fubu.png
+    - images/jr-jianbu.png
+    - images/jr-jingbu.png
+    - images/jr-tuibu.png
+    - images/jr-tunbu.png
+    - images/jr-xiongbu.png
+    - images/jr-yaobu.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

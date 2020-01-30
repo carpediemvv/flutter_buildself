@@ -4,7 +4,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:puyang/widget/BlurOvalWidget.dart';
-import 'dart:math' as math;
+import 'package:puyang/widget/BlurOvalWidgetWithHeight.dart';
+
+import 'ActionLibraryPage.dart';
+import 'PlanPage.dart';
+
 ///底部导航框架
 class TabNavigator extends StatefulWidget {
   @override
@@ -15,17 +19,25 @@ class _TabNavigatorState extends State<TabNavigator> {
   final _defaultColor = Colors.grey;
   final _activeColor = Colors.blue;
   int _currentIndex = 0;
+  PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('images/bg1.jpg'), fit: BoxFit.fitHeight),
+    return Stack(
+      children: <Widget>[
+        Container(
+          color: Colors.white,
         ),
-        child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-            child: _bodyContainer()));
+        DecoratedBox(
+            decoration: BoxDecoration(
+//              image: DecorationImage(
+//                  image: AssetImage('images/bg.png'), fit: BoxFit.fitHeight),
+            ),
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                child: _bodyContainer()))
+      ],
+    );
   }
 
   //顶部导航栏
@@ -74,78 +86,43 @@ class _TabNavigatorState extends State<TabNavigator> {
 
   //内容top
   _bodyContainer() {
-    AppBar appBar = _topbar();
-    BlurOvalWidget blurOvalWidget =_bottomContainer();
     return Scaffold(
-        appBar: BlurOvalWidget(appBar),
+        appBar: BlurOvalWidgetWithHeight(_topbar()),
         backgroundColor: Colors.transparent,
         drawer: _drawer(),
-        body: _body(appBar.preferredSize.height),
-        bottomNavigationBar: blurOvalWidget);
+        body: _body(),
+        bottomNavigationBar: _bottomContainer());
   }
 
   //内容
-  _body(var appbarHeight) {
+  _body() {
+    _pageController = PageController(
+        /**视窗比例**/
+        viewportFraction: 1);
     return Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
           Colors.transparent,
           Colors.transparent,
         ])),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          reverse: false,
-          shrinkWrap: true,
-          itemExtent: 80,
-          padding: EdgeInsets.fromLTRB(
-              20,
-              appbarHeight + MediaQueryData.fromWindow(window).padding.top,
-              20,
-              56+math.max(MediaQueryData.fromWindow(window).padding.bottom-7,0.0)),
+        child: PageView(
+          physics: BouncingScrollPhysics(),
+          onPageChanged: (int index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          controller: _pageController,
           children: <Widget>[
-            Container(
-              color: Colors.red,
-              width: 200,
-              height: 200,
-              child: Text("1hello world"),
-            ),
-            Container(
-              color: Colors.black12,
-              width: 200,
-              height: 200,
-              child: Text("hello world"),
-            ),
-            Container(
-              color: Colors.orange,
-              width: 200,
-              height: 200,
-              child: Text("hello world"),
-            ),
-            Container(
-              color: Colors.amber,
-              width: 200,
-              height: 200,
-              child: Text("hello world"),
-            ),
-            Container(
-              color: Colors.cyan,
-              width: 200,
-              height: 200,
-              child: Text("hello world"),
-            ),
-            Container(
-              color: Colors.blue,
-              width: 200,
-              height: 200,
-              child: Text("hello world"),
-            ),
+            PlanPage(),
+            ActionLibraryPage(),
           ],
         ));
   }
 
   //底部tabContainer
-  _bottomContainer(){
-    return BlurOvalWidget(
+  _bottomContainer() {
+    return BlurOvalWidgetWithHeight(
       BottomNavigationBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -155,11 +132,11 @@ class _TabNavigatorState extends State<TabNavigator> {
           setState(() {
             _currentIndex = index;
           });
+          _pageController.jumpToPage(_currentIndex);
         },
         items: [
-          _bottomItem('1fd', Icons.folder, 0),
-          _bottomItem('ae', Icons.explore, 1),
-          _bottomItem('lkl', Icons.person, 2),
+          _bottomItem('计划', Icons.assignment_turned_in, 0),
+          _bottomItem('训练库', Icons.library_books, 1),
         ],
       ),
     );

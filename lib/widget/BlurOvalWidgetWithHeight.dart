@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class BlurOvalWidget extends StatelessWidget  {
+class BlurOvalWidgetWithHeight extends StatelessWidget implements PreferredSizeWidget {
   final Widget _widget;
 
-  BlurOvalWidget(this._widget);
+  BlurOvalWidgetWithHeight(this._widget);
 
   @override
   Widget build(BuildContext context) {
@@ -23,4 +23,6 @@ class BlurOvalWidget extends StatelessWidget  {
     );
   }
 
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
