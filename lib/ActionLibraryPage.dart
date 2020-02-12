@@ -125,7 +125,6 @@ class _ActionLibraryPageState extends State<ActionLibraryPage>
           children: <Widget>[
             ListTile(
                 contentPadding: EdgeInsets.zero,
-                onTap: () => _tapItem(index),
                 title: Text(
                   actionLibraryItemBean[index].title,
                   style: TextStyle(
@@ -133,7 +132,7 @@ class _ActionLibraryPageState extends State<ActionLibraryPage>
                     fontSize: 18,
                   ),
                 )),
-            ActionGridView(index),
+            actionGridView(index),
           ],
         );
       },
@@ -143,12 +142,11 @@ class _ActionLibraryPageState extends State<ActionLibraryPage>
     );
   }
 
-  _tapItem(int index) {
-    print(index);
-    Navigator.pushNamed(context, "Cooking");
+  _tapItem(int index,ActionItemBean actionItemBean) {
+    Navigator.pushNamed(context, "ExerciseListPage",arguments: actionItemBean);
   }
 
-  GridView ActionGridView(int index) {
+  GridView actionGridView(int index) {
     List<ActionItemBean> actionItemBeans =
         actionLibraryItemBean[index].actionItemBeans;
 
@@ -165,33 +163,37 @@ class _ActionLibraryPageState extends State<ActionLibraryPage>
           ),
       itemCount: actionItemBeans.length,
       itemBuilder: (context, index) {
-        return Flex(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          direction: Axis.vertical,
-          children: <Widget>[
-            Expanded(
-              flex: 72,
-              child:Image(
-                image: AssetImage(actionItemBeans[index].coverImage),
-                fit: BoxFit.fill,
+        return GestureDetector(
+          child: Flex(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            direction: Axis.vertical,
+            children: <Widget>[
+              Expanded(
+                flex: 72,
+                child:Image(
+                  image: AssetImage(actionItemBeans[index].coverImage),
+                  fit: BoxFit.fill,
+                )
+              ),
+              Expanded(
+                flex: 28,
+                child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0,8,0,3),
+                      child: Text(actionItemBeans[index].title),
+                    ),
+                    Text(actionItemBeans[index].exerciseDescription,style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey
+                    ),),
+                  ],
+                )
               )
-            ),
-            Expanded(
-              flex: 28,
-              child:Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0,12,0,3),
-                    child: Text(actionItemBeans[index].title),
-                  ),
-                  Text(actionItemBeans[index].exerciseDescription,style: TextStyle(
-                    color: Colors.grey
-                  ),),
-                ],
-              )
-            )
-          ],
+            ],
+          ),
+          onTap:()=>_tapItem(index,actionItemBeans[index]),
         );
       },
     );

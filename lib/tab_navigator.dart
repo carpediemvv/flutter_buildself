@@ -70,7 +70,7 @@ class _TabNavigatorState extends State<TabNavigator> {
           ListTile(
             title: Text('Exercise'),
             onTap: () {
-              Navigator.of(context).pushNamed("1Exercise");
+              Navigator.of(context).pushNamed("Exercise");
             },
           ),
           ListTile(
@@ -106,7 +106,7 @@ class _TabNavigatorState extends State<TabNavigator> {
           Colors.transparent,
         ])),
         child: PageView(
-          physics: BouncingScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
           onPageChanged: (int index) {
             setState(() {
               _currentIndex = index;

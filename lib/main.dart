@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:puyang/CookingPage.dart';
+import 'package:puyang/ExerciseListPage.dart';
 import 'package:puyang/tab_navigator.dart';
 
 import 'Test/ongenerateRoute.dart';
@@ -32,7 +34,16 @@ class MyApp extends StatelessWidget {
         String routeName = settings.name;
         print(routeName);
         WidgetBuilder builder;
-        builder = (BuildContext _) => CollectPersonalInfoPage();
+        switch (settings.name) {
+          case 'Cooking':
+            builder = (BuildContext _) => CookingPage();
+            break;
+          case 'ExerciseListPage':
+            builder = (BuildContext _) => ExerciseListPage(settings.arguments);
+            break;
+          default:
+            throw Exception('Invalid route: ${settings.name}');
+        }
         return MaterialPageRoute(builder: builder, settings: settings);
       },
       routes: {

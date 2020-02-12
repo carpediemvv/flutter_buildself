@@ -10,45 +10,68 @@ class PlanPage extends StatefulWidget {
 
 class _PlanPageState extends State<PlanPage>
     with AutomaticKeepAliveClientMixin {
-
   @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    Widget divider1 = Divider(color: Colors.blue,);
-    Widget divider2 = Divider(color: Colors.green);
-    return ListView.separated(
-      scrollDirection: Axis.vertical,
-      physics: BouncingScrollPhysics(),
-      reverse: false,
-      shrinkWrap: true,
-      itemCount: 100,
-      padding: EdgeInsets.fromLTRB(
-          20, 56 + MediaQueryData
-          .fromWindow(window)
-          .padding
-          .top, 20, 56 +
-          math.max(MediaQueryData
-              .fromWindow(window)
-              .padding
-              .bottom - 7,
-              0.0)),
-      itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-            onTap:()=>_tapItem(index),
-            title: Text("$index"));
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return index % 2 == 0 ? divider1 : divider2;
-      },
+
+    return Stack(
+      children: <Widget>[
+        Container(
+          color: Colors.white,
+        ),
+        DecoratedBox(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('images/bg.png'), fit: BoxFit.fill),
+            ),
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+                child: buildBody()))
+      ],
     );
   }
 
-  _tapItem(int index){
-    print(index);
-    Navigator.pushNamed(context, "Cooking");
+  Stack buildBody() {
+    return Stack(
+      children: <Widget>[
+        Positioned(
+          bottom: 0,
+          child: Container(
+            width: MediaQueryData.fromWindow(window).size.width,
+              height: 200.0,
+              child: Column(
+                children: <Widget>[
+                  DecoratedBox(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: [
+                            Colors.lightBlueAccent,
+                            Colors.blue[700]
+                          ]),
+                          //背景渐变
+                          borderRadius: BorderRadius.circular(40.0),
+                          //3像素圆角
+                          boxShadow: [
+                            //阴影
+                            BoxShadow(
+                                color: Colors.black54,
+                                offset: Offset(2.0, 2.0),
+                                blurRadius: 4.0)
+                          ]),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 40.0, vertical: 12.0),
+                        child: Text(
+                          "添加训练计划",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ))
+                ],
+              )),
+        )
+      ],
+    );
   }
-
 }
