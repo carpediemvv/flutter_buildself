@@ -19,6 +19,7 @@ class ExerciseListPage extends StatelessWidget {
         slivers: <Widget>[
           //AppBar，包含一个导航栏
           SliverAppBar(
+            backgroundColor: Colors.blue,
             pinned: true,
             expandedHeight: 250.0,
             flexibleSpace: FlexibleSpaceBar(

@@ -40,38 +40,45 @@ class _PlanPageState extends State<PlanPage>
         Positioned(
           bottom: 0,
           child: Container(
-            width: MediaQueryData.fromWindow(window).size.width,
+              width: MediaQueryData.fromWindow(window).size.width,
               height: 200.0,
               child: Column(
                 children: <Widget>[
-                  DecoratedBox(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(colors: [
-                            Colors.lightBlueAccent,
-                            Colors.blue[700]
-                          ]),
-                          //背景渐变
-                          borderRadius: BorderRadius.circular(40.0),
-                          //3像素圆角
-                          boxShadow: [
-                            //阴影
-                            BoxShadow(
-                                color: Colors.black54,
-                                offset: Offset(2.0, 2.0),
-                                blurRadius: 4.0)
-                          ]),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 40.0, vertical: 12.0),
-                        child: Text(
-                          "添加训练计划",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ))
+                  GestureDetector(
+                    onTap:()=> openStatureGuidePage(),
+                    child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              Colors.lightBlueAccent,
+                              Colors.blue[700]
+                            ]),
+                            //背景渐变
+                            borderRadius: BorderRadius.circular(40.0),
+                            //3像素圆角
+                            boxShadow: [
+                              //阴影
+                              BoxShadow(
+                                  color: Colors.black54,
+                                  offset: Offset(2.0, 2.0),
+                                  blurRadius: 4.0)
+                            ]),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 40.0, vertical: 12.0),
+                          child: Text(
+                            "添加训练计划",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )),
+                  )
                 ],
               )),
         )
       ],
     );
+  }
+
+  void openStatureGuidePage(){
+    Navigator.pushNamed(context, "StatureGuidePage");
   }
 }

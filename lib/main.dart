@@ -3,8 +3,8 @@ import 'package:puyang/CookingPage.dart';
 import 'package:puyang/ExerciseListPage.dart';
 import 'package:puyang/tab_navigator.dart';
 
+import 'StatureGuidePage.dart';
 import 'Test/ongenerateRoute.dart';
-
 
 void main() => runApp(MyApp());
 
@@ -13,9 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,//右上角debug 标志
-      debugShowMaterialGrid:false,//网格参考线
-      showPerformanceOverlay:false,//帧率
+      debugShowCheckedModeBanner: false,
+      //右上角debug 标志
+      debugShowMaterialGrid: false,
+      //网格参考线
+      showPerformanceOverlay: false,
+      //帧率
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -28,9 +31,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-     // home: TabNavigator(),
+      // home: TabNavigator(),
       initialRoute: 'home',
-      onGenerateRoute: (RouteSettings settings){
+      onGenerateRoute: (RouteSettings settings) {
         String routeName = settings.name;
         print(routeName);
         WidgetBuilder builder;
@@ -41,13 +44,16 @@ class MyApp extends StatelessWidget {
           case 'ExerciseListPage':
             builder = (BuildContext _) => ExerciseListPage(settings.arguments);
             break;
+          case 'StatureGuidePage':
+            builder = (BuildContext _) => StatureGuidePage();
+            break;
           default:
             throw Exception('Invalid route: ${settings.name}');
         }
         return MaterialPageRoute(builder: builder, settings: settings);
       },
       routes: {
-        "home":(context)=>TabNavigator(),
+        "home": (context) => TabNavigator(),
 //        "Exercise":(context)=>ExercisePage(),
 //        "Cooking":(context)=>CookingPage()
       },
