@@ -3,13 +3,14 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:puyang/widget/GuidelineBar.dart';
+import 'dart:math' as math;
 
 class StatureGuidePage extends StatefulWidget {
   final List<Widget> pageView = [];
   String title = "选择部位";
   String nextText = "选择部位";
   int nextTextbgColor = 300;
-
+  String _selectedBodyPart;
   @override
   State<StatefulWidget> createState() => _StatureGuidePageState();
 }
@@ -74,11 +75,14 @@ class _StatureGuidePageState extends State<StatureGuidePage> {
                   ),
                 ),
                 Container(
+                  margin: EdgeInsets.only(bottom: math.max(
+                      MediaQueryData.fromWindow(window).padding.bottom - 7, 0.0)),
                   height: 80,
                   child: Center(
                     child: GestureDetector(
                       onTap: () {
                         if (_currentIndex == 0) {
+                          print(widget._selectedBodyPart.toString());
                           _pageController.jumpToPage(1);
                         } else if (_currentIndex == 1) {
                           _pageController.jumpToPage(2);
@@ -116,56 +120,105 @@ class _StatureGuidePageState extends State<StatureGuidePage> {
       ),
     );
   }
-}
 
-Center selectBodyPart() => Center(
-      child: Flex(
-        direction: Axis.vertical,
-        children: <Widget>[
-          Text("确认您要改变的部位，一次只能选取一处"),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: Flex(
-                direction: Axis.horizontal,
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20,8.0,10,20),
-                      child: Image(
-                        image: AssetImage("images/front.png"),
-                        fit: BoxFit.fill,
-                      ),
+  Center selectBodyPart() => Center(
+    child: Flex(
+      direction: Axis.vertical,
+      children: <Widget>[
+        Text("确认您要改变的部位，一次只能选取一处"),
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: Flex(
+              direction: Axis.horizontal,
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20,8.0,10,20),
+                    child: Image(
+                      image: AssetImage("images/front.png"),
+                      fit: BoxFit.fill,
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20,8.0,10,20),
-                      child: Image(
-                        image: AssetImage("images/back.png"),
-                        fit: BoxFit.fill,
-                      ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20,8.0,10,20),
+                    child: Image(
+                      image: AssetImage("images/back.png"),
+                      fit: BoxFit.fill,
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
-          Container(
-            child: Wrap(
-              children: <Widget>[Text("胸"),Text("肩臂"),Text("腰腹"), Text("臂腿"),],
-            ),
-          )
-        ],
-      ),
+        ),
+        Container(
+          child: ChoiceBodyPart(widget),
+        )
+      ],
+    ),
+  );
+
+  Center selectBodyPartState() => Center(
+    child: Text("bbb"),
+  );
+
+  Center manageTime() => Center(
+    child: Text("ccc"),
+  );
+
+}
+
+class ChoiceBodyPart extends StatefulWidget {
+  final StatureGuidePage _widget;
+  ChoiceBodyPart(this._widget);
+  _ChoiceBodyPartState createState() => _ChoiceBodyPartState();
+}
+
+class _ChoiceBodyPartState extends State<ChoiceBodyPart> {
+  String _selected = '胸';
+
+  List<String> _sub=<String>[
+    '胸','肩臂','腰腹','臂腿'
+  ];
+
+  Iterable<Widget> get actorWidgets sync*{
+    for(String choiceSub in _sub){
+      yield Padding(
+          padding:EdgeInsets.all(8.0) ,
+          child: ChoiceChip(
+            backgroundColor:Colors.grey,
+            selectedColor: Colors.blue,
+            label: Text(choiceSub),
+            labelStyle: TextStyle(fontWeight: FontWeight.w200,fontSize: 15.0),
+            labelPadding: EdgeInsets.only(left: 20.0,right: 20.0),
+            materialTapTargetSize: MaterialTapTargetSize.padded,
+            onSelected: (bool value) {
+              setState(() {
+                _selected = value ? choiceSub : _selected;
+                widget._widget._selectedBodyPart=_selected;
+              });
+            },
+            selected: _selected == choiceSub,)
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    widget._widget._selectedBodyPart=_selected;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Wrap(
+          children: actorWidgets.toList(),
+        ),
+      ],
     );
 
-Center selectBodyPartState() => Center(
-      child: Text("bbb"),
-    );
-
-Center manageTime() => Center(
-      child: Text("ccc"),
-    );
+  }
+}
