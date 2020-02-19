@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:puyang/widget/GuidelineBar.dart';
 import 'dart:math' as math;
 
@@ -11,6 +12,7 @@ class StatureGuidePage extends StatefulWidget {
   String nextText = "选择部位";
   int nextTextbgColor = 300;
   String _selectedBodyPart;
+
   @override
   State<StatefulWidget> createState() => _StatureGuidePageState();
 }
@@ -36,7 +38,7 @@ class _StatureGuidePageState extends State<StatureGuidePage> {
     return Material(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.teal,
           title: Text(widget.title),
         ),
         body: Container(
@@ -75,8 +77,10 @@ class _StatureGuidePageState extends State<StatureGuidePage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: math.max(
-                      MediaQueryData.fromWindow(window).padding.bottom - 7, 0.0)),
+                  margin: EdgeInsets.only(
+                      bottom: math.max(
+                          MediaQueryData.fromWindow(window).padding.bottom - 7,
+                          0.0)),
                   height: 80,
                   child: Center(
                     child: GestureDetector(
@@ -92,7 +96,7 @@ class _StatureGuidePageState extends State<StatureGuidePage> {
                           decoration: BoxDecoration(
                               gradient: LinearGradient(colors: [
                                 Colors.lightBlueAccent,
-                                Colors.blue[widget.nextTextbgColor]
+                                Colors.teal[widget.nextTextbgColor]
                               ]),
                               //背景渐变
                               borderRadius: BorderRadius.circular(40.0),
@@ -122,95 +126,105 @@ class _StatureGuidePageState extends State<StatureGuidePage> {
   }
 
   Center selectBodyPart() => Center(
-    child: Flex(
-      direction: Axis.vertical,
-      children: <Widget>[
-        Text("确认您要改变的部位，一次只能选取一处"),
-        Expanded(
-          flex: 1,
-          child: Center(
-            child: Flex(
-              direction: Axis.horizontal,
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20,8.0,10,20),
-                    child: Image(
-                      image: AssetImage("images/front.png"),
-                      fit: BoxFit.fill,
+        child: Flex(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Text("确认您要改变的部位，一次只能选取一处"),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 8.0, 10, 20),
+                        child: Image(
+                          image: AssetImage("images/front.png"),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 8.0, 10, 20),
+                        child: Image(
+                          image: AssetImage("images/back.png"),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20,8.0,10,20),
-                    child: Image(
-                      image: AssetImage("images/back.png"),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
+            Container(
+              child: ChoiceBodyPart(widget),
+            )
+          ],
         ),
-        Container(
-          child: ChoiceBodyPart(widget),
-        )
-      ],
-    ),
-  );
+      );
 
   Center selectBodyPartState() => Center(
-    child: Text("bbb"),
-  );
+        child: Flex(
+          direction: Axis.vertical,
+          children: <Widget>[
+            Text("明确您的部位现状，制定合适的计划"),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: ChoiceBodyPartState(widget),
+              ),
+            ),
+          ],
+        ),
+      );
 
   Center manageTime() => Center(
-    child: Text("ccc"),
-  );
-
+        child: Text("ccc"),
+      );
 }
 
 class ChoiceBodyPart extends StatefulWidget {
   final StatureGuidePage _widget;
+
   ChoiceBodyPart(this._widget);
-  _ChoiceBodyPartState createState() => _ChoiceBodyPartState();
+
+  _ChoiceBodyPart createState() => _ChoiceBodyPart();
 }
 
-class _ChoiceBodyPartState extends State<ChoiceBodyPart> {
+class _ChoiceBodyPart extends State<ChoiceBodyPart> {
   String _selected = '胸';
 
-  List<String> _sub=<String>[
-    '胸','肩臂','腰腹','臂腿'
-  ];
+  List<String> _sub = <String>['胸', '肩臂', '腰腹', '臂腿'];
 
-  Iterable<Widget> get actorWidgets sync*{
-    for(String choiceSub in _sub){
+  Iterable<Widget> get actorWidgets sync* {
+    for (String choiceSub in _sub) {
       yield Padding(
-          padding:EdgeInsets.all(8.0) ,
+          padding: EdgeInsets.all(8.0),
           child: ChoiceChip(
-            backgroundColor:Colors.grey,
-            selectedColor: Colors.blue,
+            backgroundColor: Colors.grey,
+            selectedColor: Colors.teal,
             label: Text(choiceSub),
-            labelStyle: TextStyle(fontWeight: FontWeight.w200,fontSize: 15.0),
-            labelPadding: EdgeInsets.only(left: 20.0,right: 20.0),
+            labelStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 15.0),
+            labelPadding: EdgeInsets.only(left: 20.0, right: 20.0),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onSelected: (bool value) {
               setState(() {
                 _selected = value ? choiceSub : _selected;
-                widget._widget._selectedBodyPart=_selected;
+                widget._widget._selectedBodyPart = _selected;
               });
             },
-            selected: _selected == choiceSub,)
-      );
+            selected: _selected == choiceSub,
+          ));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    widget._widget._selectedBodyPart=_selected;
+    widget._widget._selectedBodyPart = _selected;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -219,6 +233,85 @@ class _ChoiceBodyPartState extends State<ChoiceBodyPart> {
         ),
       ],
     );
+  }
+}
 
+class ChoiceBodyPartState extends StatefulWidget {
+  final StatureGuidePage _widget;
+
+  ChoiceBodyPartState(this._widget);
+
+  _ChoiceBodyPartState createState() => _ChoiceBodyPartState();
+}
+
+class _ChoiceBodyPartState extends State<ChoiceBodyPartState> {
+  String _selected = '';
+
+  List<String> _sub = <String>['松弛', '饱满', '匀称', '线条明晰', '肌肉强壮', '肌肉发达'];
+
+  Iterable<Widget> get actorWidgets sync* {
+    for (String choiceSub in _sub) {
+      yield Stack(
+        children: <Widget>[
+          SizedBox(
+              width: MediaQueryData.fromWindow(window).size.width / 2,
+              height: MediaQueryData.fromWindow(window).size.width / 2,
+              child: Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: ChoiceChip(
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.teal,
+                  label: Text(""),
+                  labelStyle:
+                      TextStyle(fontWeight: FontWeight.w200, fontSize: 0.0),
+                  labelPadding: EdgeInsets.all(
+                      MediaQueryData.fromWindow(window).size.width / 4),
+                  materialTapTargetSize: MaterialTapTargetSize.padded,
+                  onSelected: (bool value) {
+                    setState(() {
+                      print('dd');
+                      _selected = value ? choiceSub : _selected;
+                      widget._widget._selectedBodyPart = _selected;
+                    });
+                  },
+                  selected: _selected == choiceSub,
+                ),
+              )),
+          SizedBox(
+            width: MediaQueryData.fromWindow(window).size.width / 2,
+            height: MediaQueryData.fromWindow(window).size.width / 2,
+            child: Padding(
+              padding:  EdgeInsets.all(MediaQueryData.fromWindow(window).size.width / 8),
+              child: Image(
+                image: AssetImage("images/tunbu.png"),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: SizedBox(
+              width: MediaQueryData.fromWindow(window).size.width / 2,
+              child: Center(
+                child: Text(choiceSub),
+              ),
+            ),
+          )
+        ],
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    widget._widget._selectedBodyPart = _selected;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Wrap(
+          children: actorWidgets.toList(),
+        ),
+      ],
+    );
   }
 }

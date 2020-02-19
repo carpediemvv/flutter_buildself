@@ -32,7 +32,7 @@ class _GuidelineBarState extends State<GuidelineBar> {
     Color colorIndex;
     for (int i = 0; i < widget.count; i++) {
       if(widget.index>=i){
-        colorIndex=Colors.blue;
+        colorIndex=Colors.teal;
       }else{
         colorIndex=Colors.grey;
       }
