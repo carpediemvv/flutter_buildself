@@ -175,7 +175,7 @@ class _StatureGuidePageState extends State<StatureGuidePage> {
             Expanded(
               flex: 1,
               child: Center(
-                child: ChoiceBodyPartState(widget),
+
               ),
             ),
           ],
