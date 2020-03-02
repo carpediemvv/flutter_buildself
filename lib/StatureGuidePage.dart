@@ -126,46 +126,46 @@ class _StatureGuidePageState extends State<StatureGuidePage> {
   }
 
   Center selectBodyPart() => Center(
-        child: Flex(
-          direction: Axis.vertical,
-          children: <Widget>[
-            Text("确认您要改变的部位，一次只能选取一处"),
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Flex(
-                  direction: Axis.horizontal,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 8.0, 10, 20),
-                        child: Image(
-                          image: AssetImage("images/front.png"),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
+    child: Flex(
+      direction: Axis.vertical,
+      children: <Widget>[
+        Text("确认您要改变的部位，一次只能选取一处"),
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: Flex(
+              direction: Axis.horizontal,
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20,8.0,10,20),
+                    child: Image(
+                      image: AssetImage("images/front.png"),
+                      fit: BoxFit.fill,
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 8.0, 10, 20),
-                        child: Image(
-                          image: AssetImage("images/back.png"),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20,8.0,10,20),
+                    child: Image(
+                      image: AssetImage("images/back.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                )
+              ],
             ),
-            Container(
-              child: ChoiceBodyPart(widget),
-            )
-          ],
+          ),
         ),
-      );
+        Container(
+          child: ChoiceBodyPart(widget),
+        )
+      ],
+    ),
+  );
 
   Center selectBodyPartState() => Center(
         child: Flex(
@@ -208,103 +208,23 @@ class _ChoiceBodyPart extends State<ChoiceBodyPart> {
             backgroundColor: Colors.grey,
             selectedColor: Colors.teal,
             label: Text(choiceSub),
-            labelStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 15.0),
-            labelPadding: EdgeInsets.only(left: 20.0, right: 20.0),
+            labelStyle: TextStyle(fontWeight: FontWeight.w200,fontSize: 15.0),
+            labelPadding: EdgeInsets.only(left: 20.0,right: 20.0),
             materialTapTargetSize: MaterialTapTargetSize.padded,
             onSelected: (bool value) {
               setState(() {
                 _selected = value ? choiceSub : _selected;
-                widget._widget._selectedBodyPart = _selected;
+                widget._widget._selectedBodyPart=_selected;
               });
             },
-            selected: _selected == choiceSub,
-          ));
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    widget._widget._selectedBodyPart = _selected;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Wrap(
-          children: actorWidgets.toList(),
-        ),
-      ],
-    );
-  }
-}
-
-class ChoiceBodyPartState extends StatefulWidget {
-  final StatureGuidePage _widget;
-
-  ChoiceBodyPartState(this._widget);
-
-  _ChoiceBodyPartState createState() => _ChoiceBodyPartState();
-}
-
-class _ChoiceBodyPartState extends State<ChoiceBodyPartState> {
-  String _selected = '';
-
-  List<String> _sub = <String>['松弛', '饱满', '匀称', '线条明晰', '肌肉强壮', '肌肉发达'];
-
-  Iterable<Widget> get actorWidgets sync* {
-    for (String choiceSub in _sub) {
-      yield Stack(
-        children: <Widget>[
-          SizedBox(
-              width: MediaQueryData.fromWindow(window).size.width / 2,
-              height: MediaQueryData.fromWindow(window).size.width / 2,
-              child: Padding(
-                padding: const EdgeInsets.all(40.0),
-                child: ChoiceChip(
-                  backgroundColor: Colors.grey,
-                  selectedColor: Colors.teal,
-                  label: Text(""),
-                  labelStyle:
-                      TextStyle(fontWeight: FontWeight.w200, fontSize: 0.0),
-                  labelPadding: EdgeInsets.all(
-                      MediaQueryData.fromWindow(window).size.width / 4),
-                  materialTapTargetSize: MaterialTapTargetSize.padded,
-                  onSelected: (bool value) {
-                    setState(() {
-                      print('dd');
-                      _selected = value ? choiceSub : _selected;
-                      widget._widget._selectedBodyPart = _selected;
-                    });
-                  },
-                  selected: _selected == choiceSub,
-                ),
-              )),
-          SizedBox(
-            width: MediaQueryData.fromWindow(window).size.width / 2,
-            height: MediaQueryData.fromWindow(window).size.width / 2,
-            child: Padding(
-              padding:  EdgeInsets.all(MediaQueryData.fromWindow(window).size.width / 8),
-              child: Image(
-                image: AssetImage("images/tunbu.png"),
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: SizedBox(
-              width: MediaQueryData.fromWindow(window).size.width / 2,
-              child: Center(
-                child: Text(choiceSub),
-              ),
-            ),
-          )
-        ],
+            selected: _selected == choiceSub,)
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    widget._widget._selectedBodyPart = _selected;
+    widget._widget._selectedBodyPart=_selected;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[

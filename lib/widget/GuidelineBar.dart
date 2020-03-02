@@ -34,7 +34,7 @@ class _GuidelineBarState extends State<GuidelineBar> {
       if(widget.index>=i){
         colorIndex=Colors.teal;
       }else{
-        colorIndex=Colors.grey;
+        colorIndex=Colors.teal[200];
       }
       widget.view.add(Expanded(
         flex: 1,
