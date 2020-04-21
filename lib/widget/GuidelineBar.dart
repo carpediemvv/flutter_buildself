@@ -32,21 +32,22 @@ class _GuidelineBarState extends State<GuidelineBar> {
     Color colorIndex;
     for (int i = 0; i < widget.count; i++) {
       if(widget.index>=i){
-        colorIndex=Colors.teal;
+        colorIndex=Colors.lightBlueAccent[100];
       }else{
-        colorIndex=Colors.teal[200];
+        colorIndex=Colors.grey[200];
       }
       widget.view.add(Expanded(
         flex: 1,
         child: Container(
           margin: EdgeInsets.only(left: 5, right: 5),
-          height: 6,
+          height: 3,
           color: colorIndex,
         ),
       ));
     }
     return Container(
-      height: 40,
+      alignment: Alignment.bottomCenter,
+      height: 23,
       child: Flex(
         direction: Axis.horizontal,
         children: widget.view,

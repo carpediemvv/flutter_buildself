@@ -49,7 +49,7 @@ class _PlanPageState extends State<PlanPage>
                         decoration: BoxDecoration(
                             gradient: LinearGradient(colors: [
                               Colors.lightBlueAccent,
-                              Colors.teal[700]
+                              Colors.blue[700]
                             ]),
                             //背景渐变
                             borderRadius: BorderRadius.circular(40.0),

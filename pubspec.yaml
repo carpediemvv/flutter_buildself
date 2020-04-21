@@ -64,6 +64,16 @@ flutter:
     - images/jr-yaobu.png
     - images/front.png
     - images/back.png
+    - images/body/arm-A.png
+    - images/body/arm-B.png
+    - images/body/back-A.png
+    - images/body/back-B.png
+    - images/body/body-A.png
+    - images/body/body-B.png
+    - images/body/leg-A.png
+    - images/body/leg-B.png
+    - images/body/pectorales-A.png
+    - images/body/pectorales-B.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
